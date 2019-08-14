@@ -1,7 +1,7 @@
 {
   "name": "@ethernode/enui",
   "version": "1.0.0-rc1",
-  "homepage": "https://thernodeio.github.io/enui/",
+  "homepage": "https://ethernodeio.github.io/enui/",
   "description": "User interface for managing nodes through enAPI",
   "main": "build/index.js",
   "scripts": {
