@@ -1,12 +1,24 @@
 {
   "extends": [
-    "tslint:recommended"
+    "tslint:recommended",
+    "tslint-react-hooks"
   ],
   "rules": {
+    "react-hooks-nesting": "warning",
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-console": [true, "log"],
-    "indent": [true, "spaces", 2],
-    "max-classes-per-file" : false
+    "no-console": [
+      false,
+      "log"
+    ],
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "max-classes-per-file": false,
+    "member-access": false,
+    "no-unused-expression": false,
+    "max-line-length": false
   }
 }
