@@ -1,6 +1,6 @@
 {
   "name": "@ethernode/enui",
-  "version": "0.0.0-development",
+  "version": "1.0.0-rc1",
   "homepage": "https://thernodeio.github.io/enui/",
   "description": "User interface for managing nodes through enAPI",
   "main": "build/index.js",
@@ -10,7 +10,7 @@
     "lint": "tslint --fix -p .",
     "test": "npm run lint && react-scripts test --coverage --passWithNoTests"
   },
-  "author": "",
+  "author": "bakon from ethernode",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/jest": "^24.0.13",
