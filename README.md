@@ -1,8 +1,8 @@
-## enKeep-ui
+## enUI
 
-enKeep UI build in react based on [ETC Labs Core's pristine-type-script template](https://github.com/etclabscore/pristine-typescript-react).
+enUI build in react based on [ETC Labs Core's pristine-type-script template](https://github.com/etclabscore/pristine-typescript-react).
 
-enKeep-ui is a out of the box dashboard dapp, that levereges the enOS API/SDK to get your started wtih Ethereum based blockchain nodes and creating dapps just like this one.
+enUI is a dashboard app build on top of [enApi](https://github.com/ethernodeio/enapi/), to get you started with running and managing your own Ethereum nodes.
 
 ### Contributing
 
