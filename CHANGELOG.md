@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/ethernodeio/enui/compare/1.0.7...1.0.8) (2019-08-16)
+
+
+### Bug Fixes
+
+* more fixes and test for router and GH pages ([b51d368](https://github.com/ethernodeio/enui/commit/b51d368))
+
 ## [1.0.7](https://github.com/ethernodeio/enui/compare/1.0.6...1.0.7) (2019-08-16)
 
 
