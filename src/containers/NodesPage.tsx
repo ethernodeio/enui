@@ -21,9 +21,9 @@ const NodesPage: React.FC<IProps> = (props) => {
     }),
   );
 
-  const [username, setUsername] = useUsername();
+  const [username] = useUsername();
   const [nodes, setNodes] = useNode();
-  const [token, setToken] = useToken();
+  const [token] = useToken();
   const [mounted, setMounted] = useState(true);
   const [result, setResult] = useState();
   const classes = useStyles();
@@ -91,6 +91,7 @@ const NodesPage: React.FC<IProps> = (props) => {
           node.clientversion = clientVersionResult.result;
           setNodes(nodes);
         });
+        return nodes;
       });
     });
   };

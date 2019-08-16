@@ -47,7 +47,7 @@ export function NavigationBar(props: IProps) {
       <AppBar position="static" className={classes.appbar} >
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" arial-label="menu">
-            <img src={logo} height="35" />
+            <img src={logo} height="35" alt="" />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             {props.title}

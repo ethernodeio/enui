@@ -22,7 +22,7 @@ interface IProps {
 }
 
 function NodeList(props: IProps) {
-  const [nodes, setNodes] = useNode();
+  const [nodes] = useNode();
   const classes = useStyles();
 
   return (

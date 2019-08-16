@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useUsername } from "../stores/useCredsStore";
-import { useNode } from "../stores/useNodesStore";
-import { useToken } from "../stores/useTokenStore";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
@@ -59,12 +56,7 @@ export default function NewNodeModal(props: IProps) {
   );
 
   // enUI hooks
-  const [username, setUsername] = useUsername();
   const [nodeName, setNodeName] = useState();
-  const [nodes, setNodes] = useNode();
-  const [token, setToken] = useToken();
-  const [result, setResult] = useState();
-  const [error, setError] = useState();
   // Form HOoks
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -198,7 +190,6 @@ export default function NewNodeModal(props: IProps) {
                 Create Node
                 </Button>
             </form>
-            {error && <div>{error}</div>}
           </Container>
         </div>
       </Modal>

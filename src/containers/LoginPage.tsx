@@ -54,19 +54,18 @@ interface IProps {
 const LoginPage: React.FC<IProps> = (props) => {
   const [username, setUsername] = useUsername();
   const [password, setPassword] = useState("");
-  const [nodes, setNodes] = useNode();
   const [token, setToken] = useToken();
+  const [nodes, setNodes] = useNode();
   // const [transport, setTransport] = useTransport();
   const [hostname, setHostname] = useHostname();
   const [port, setPort] = usePort();
-  const [result, setResult] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
     setUsername("");
     setToken("");
     setNodes([]);
-  }, []);
+  }, [token && nodes]);
 
   async function login(event: any) {
     event.preventDefault();
@@ -77,7 +76,6 @@ const LoginPage: React.FC<IProps> = (props) => {
       if (authResult.status === "success") {
         setUsername(authResult.userName);
         setToken(authResult.token);
-        setNodes(authResult.nodes);
         props.history.push("/");
       } else {
         setError(authResult.message);
@@ -125,6 +123,7 @@ const LoginPage: React.FC<IProps> = (props) => {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+          Setup enApi host location<br />
           <TextField
             variant="outlined"
             margin="normal"
@@ -150,7 +149,7 @@ const LoginPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.go("/nodes")}
+            onClick={() => props.history.go()}
             variant="contained"
             color="primary"
             className={classes.submit}
