@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { EnAPIhttp } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { useNode } from "../stores/useNodesStore";
@@ -60,13 +60,6 @@ const LoginPage: React.FC<IProps> = (props) => {
   const [hostname, setHostname] = useHostname();
   const [port, setPort] = usePort();
   const [error, setError] = useState();
-
-  useEffect(() => {
-    setUsername("");
-    setToken("");
-    setNodes([]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   async function login(event: any) {
     event.preventDefault();
