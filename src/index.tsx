@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const routing = (
   <ReusableProvider>
-    <Router>
+    <Router basename={"/enui"}>
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/login" component={LoginPage} />

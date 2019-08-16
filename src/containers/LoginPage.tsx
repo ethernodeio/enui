@@ -54,8 +54,8 @@ interface IProps {
 const LoginPage: React.FC<IProps> = (props) => {
   const [username, setUsername] = useUsername();
   const [password, setPassword] = useState("");
-  const [setToken] = useToken();
-  const [setNodes] = useNode();
+  const [token, setToken] = useToken();
+  const [nodes, setNodes] = useNode();
   // const [transport, setTransport] = useTransport();
   const [hostname, setHostname] = useHostname();
   const [port, setPort] = usePort();
@@ -72,6 +72,7 @@ const LoginPage: React.FC<IProps> = (props) => {
         setToken(authResult.token);
         setNodes(authResult.nodes);
         props.history.push("/");
+        return (token + nodes);
       } else {
         setError(authResult.message);
       }
