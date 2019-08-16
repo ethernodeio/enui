@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "81fc107850c74b2ad6a8b78e980e5375",
+    "revision": "18be6e32e0e3d60b1142e5ccd63fc26a",
     "url": "/enui/index.html"
   },
   {
-    "revision": "fa675f9e6f91c0dab3f1",
+    "revision": "2116ecdeac423b495273",
     "url": "/enui/static/css/main.d498bfb3.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/enui/static/js/2.574d32ec.chunk.js"
   },
   {
-    "revision": "fa675f9e6f91c0dab3f1",
-    "url": "/enui/static/js/main.57fe0a00.chunk.js"
+    "revision": "2116ecdeac423b495273",
+    "url": "/enui/static/js/main.b425f1b1.chunk.js"
   },
   {
     "revision": "65cbc8bbc99f143ac624",
