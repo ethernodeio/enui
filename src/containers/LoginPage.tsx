@@ -78,9 +78,7 @@ const LoginPage: React.FC<IProps> = (props) => {
       }
     }
   }
-
   const classes = useStyles();
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
