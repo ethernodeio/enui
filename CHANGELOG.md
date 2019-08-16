@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/ethernodeio/enui/compare/1.0.0...1.0.1) (2019-08-16)
+
+
+### Bug Fixes
+
+* fixed all linting errors for ci ([92ec84c](https://github.com/ethernodeio/enui/commit/92ec84c))
+* fixed linting errors ([266c762](https://github.com/ethernodeio/enui/commit/266c762))
+
 # 1.0.0 (2019-08-14)
 
 
