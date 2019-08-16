@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/ethernodeio/enui/compare/1.0.2...1.0.3) (2019-08-16)
+
+
+### Bug Fixes
+
+* added baseName to router for gh pages ([28f4e14](https://github.com/ethernodeio/enui/commit/28f4e14))
+
 ## [1.0.2](https://github.com/ethernodeio/enui/compare/1.0.1...1.0.2) (2019-08-16)
 
 
