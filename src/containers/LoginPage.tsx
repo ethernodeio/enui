@@ -71,7 +71,7 @@ const LoginPage: React.FC<IProps> = (props) => {
         setUsername(authResult.userName);
         setToken(authResult.token);
         setNodes(authResult.nodes);
-        props.history.push("/");
+        props.history.push("/main");
         return (token + nodes);
       } else {
         setError(authResult.message);
@@ -143,7 +143,7 @@ const LoginPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.go()}
+            onClick={() => props.history.go(0)}
             variant="contained"
             color="primary"
             className={classes.submit}

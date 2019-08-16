@@ -6,18 +6,18 @@ import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
 import MainPage from "./containers/MainPage";
 import NodesPage from "./containers/NodesPage";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const routing = (
   <ReusableProvider>
-    <HashRouter basename={"/enui"}>
+    <BrowserRouter basename={"/enui"}>
       <Switch>
-        <Route path="/" exact component={MainPage} />
+        <Route path="/main" exact component={MainPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/nodes" component={NodesPage} />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   </ReusableProvider>
 );
 

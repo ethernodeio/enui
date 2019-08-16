@@ -52,7 +52,7 @@ export function NavigationBar(props: IProps) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          <Link to="/"><Button className={classes.menuButton2}><AccountBoxIcon /></Button></Link>
+          <Link to="/main"><Button className={classes.menuButton2}><AccountBoxIcon /></Button></Link>
           <Link to="/nodes"><Button className={classes.menuButton2}><NodeIcon /></Button></Link>
           <Link to="/login"><Button className={classes.menuButton2}>Logout</Button></Link>
         </Toolbar>
