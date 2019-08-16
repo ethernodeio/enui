@@ -10,7 +10,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 
 const routing = (
   <ReusableProvider>
-    <HashRouter basename={"/"}>
+    <HashRouter basename={"/enui"}>
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/login" component={LoginPage} />
