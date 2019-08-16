@@ -54,8 +54,8 @@ interface IProps {
 const LoginPage: React.FC<IProps> = (props) => {
   const [username, setUsername] = useUsername();
   const [password, setPassword] = useState("");
-  const [token, setToken] = useToken();
-  const [nodes, setNodes] = useNode();
+  const [setToken] = useToken();
+  const [setNodes] = useNode();
   // const [transport, setTransport] = useTransport();
   const [hostname, setHostname] = useHostname();
   const [port, setPort] = usePort();
@@ -65,7 +65,8 @@ const LoginPage: React.FC<IProps> = (props) => {
     setUsername("");
     setToken("");
     setNodes([]);
-  }, [token && nodes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function login(event: any) {
     event.preventDefault();
@@ -76,6 +77,7 @@ const LoginPage: React.FC<IProps> = (props) => {
       if (authResult.status === "success") {
         setUsername(authResult.userName);
         setToken(authResult.token);
+        setNodes(authResult.nodes);
         props.history.push("/");
       } else {
         setError(authResult.message);

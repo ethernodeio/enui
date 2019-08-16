@@ -28,10 +28,41 @@ const NodesPage: React.FC<IProps> = (props) => {
   const [result, setResult] = useState();
   const classes = useStyles();
 
+  const getNodes = () => {
+    EnAPIhttp.getUser(token, username).then((userInfoResult) => {
+      setNodes(userInfoResult.nodes);
+      if (userInfoResult.nodes.length === 0) { setMounted(false); }
+      nodes.map((node: any, index: any) => {
+        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_version", [], 67).then((versionResult) => {
+          // tslint:disable-next-line: no-string-literal
+          node.version = versionResult.result;
+          setNodes(nodes);
+        });
+        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_syncing", [], 67).then((syncResult) => {
+          if (syncResult.result !== false) {
+            // tslint:disable-next-line: no-string-literal
+            node.sync = syncResult.result;
+            setNodes(nodes);
+          } else {
+            node.sync = "false";
+            setNodes(nodes);
+          }
+          setMounted(false);
+        });
+        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "web3_clientVersion", [], 67).then((clientVersionResult) => {
+          // tslint:disable-next-line: no-string-literal
+          node.clientversion = clientVersionResult.result;
+          setNodes(nodes);
+        });
+        return nodes;
+      });
+    });
+  };
+
   useEffect(() => {
-    console.log(nodes);
     getNodes();
     if (nodes.length === 0) { return; }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted && nodes]);
 
   function testNode() {
@@ -64,37 +95,6 @@ const NodesPage: React.FC<IProps> = (props) => {
       setResult(removeNodeResult.message);
     }
   }
-
-  const getNodes = () => {
-    EnAPIhttp.getUser(token, username).then((userInfoResult) => {
-      setNodes(userInfoResult.nodes);
-      if (userInfoResult.nodes.length === 0) { setMounted(false); }
-      nodes.map((node: any, index: any) => {
-        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_version", [], 67).then((versionResult) => {
-          // tslint:disable-next-line: no-string-literal
-          node.version = versionResult.result;
-          setNodes(nodes);
-        });
-        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_syncing", [], 67).then((syncResult) => {
-          if (syncResult.result !== false) {
-            // tslint:disable-next-line: no-string-literal
-            node.sync = syncResult.result;
-            setNodes(nodes);
-          } else {
-            node.sync = "false";
-            setNodes(nodes);
-          }
-          setMounted(false);
-        });
-        EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "web3_clientVersion", [], 67).then((clientVersionResult) => {
-          // tslint:disable-next-line: no-string-literal
-          node.clientversion = clientVersionResult.result;
-          setNodes(nodes);
-        });
-        return nodes;
-      });
-    });
-  };
 
   return (
     <div className={classes.root} >
