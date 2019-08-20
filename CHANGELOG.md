@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/ethernodeio/enui/compare/1.1.2...1.1.3) (2019-08-20)
+
+
+### Bug Fixes
+
+* small fixes for smother deployment description update ([feb0a41](https://github.com/ethernodeio/enui/commit/feb0a41))
+
 ## [1.1.2](https://github.com/ethernodeio/enui/compare/1.1.1...1.1.2) (2019-08-20)
 
 
