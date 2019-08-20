@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { EnAPIhttp } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { useNode } from "../stores/useNodesStore";
@@ -161,6 +162,7 @@ const LoginPage: React.FC<IProps> = (props) => {
           </Button>
           {error && <div>{error}</div>}
         </form>
+        <small>First time <Link to="/register">register</Link></small>
       </div>
     </Container >
   );

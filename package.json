@@ -1,6 +1,6 @@
 {
   "name": "enui",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "User interface for managing Ethereum blockchain nodes through enAPI",
   "main": "build/electron.ts",
   "homepage": ".",
@@ -17,7 +17,7 @@
     "test": "npm run lint && react-scripts test --coverage --passWithNoTests",
     "electron": "npm run build && npm run build:electron && electron build/electron.js",
     "build:electron": "tsc electron/electron.ts --outDir build",
-    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never"
+    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never -l"
   },
   "license": "Apache-2.0",
   "devDependencies": {
