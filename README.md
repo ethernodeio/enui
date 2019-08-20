@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ethernodeio/enui/master/assets/icon.png" width="256" title="enUI: UI integration build using React-Pristine for enAPI ">
+  <img src="https://raw.githubusercontent.com/ethernodeio/enui/master/assets/iconText.png" width="256" title="enUI: UI integration build using React-Pristine for enAPI ">
 </p>
 
 ## enUI
