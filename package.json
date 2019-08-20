@@ -17,7 +17,7 @@
     "test": "npm run lint && react-scripts test --coverage --passWithNoTests",
     "electron": "npm run build && npm run build:electron && electron build/electron.js",
     "build:electron": "tsc electron/electron.ts --outDir build",
-    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never -l"
+    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never"
   },
   "license": "Apache-2.0",
   "devDependencies": {
@@ -84,7 +84,8 @@
     "linux": {
       "target": [
         "tar.gz",
-        "Appimage"
+        "AppImage",
+        "deb"
       ],
       "category": "Development"
     },
