@@ -82,26 +82,6 @@ jobs:
             paths:
               - dist/*
 
-  macbuild:
-    <<: *defaults
-    macos:
-      xcode: "10.2.1"
-    steps:
-      - checkout
-      - run: brew install nodenv
-      - run: eval "$(nodenv init -)"
-      - run:
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
-      - run: npm install
-      - run: npm run build
-      - run: npm run electron:build
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - dist/*
-
   linuxbuild:
     <<: *defaults
     docker:
