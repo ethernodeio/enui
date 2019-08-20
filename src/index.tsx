@@ -6,21 +6,21 @@ import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
 import MainPage from "./containers/MainPage";
 import NodesPage from "./containers/NodesPage";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 
 const routing = (
   <ReusableProvider>
-    <BrowserRouter basename={"/enui"}>
+    <HashRouter>
       <Switch>
         <Route exact path="/" render={() => (
           <Redirect to="/login" />
         )} />
-        <Route path="/main" exact component={MainPage} />
+        <Route path="/main" component={MainPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/nodes" component={NodesPage} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   </ReusableProvider>
 );
 

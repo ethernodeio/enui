@@ -64,6 +64,62 @@ jobs:
       - run: ./node_modules/.bin/semantic-release
       - save_cache: *save-deps-cache
 
+windowsbuild:
+    <<: *defaults
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: npm install
+      - run: npm run build
+      - run: npm run electron:build -- --win
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist/*
+
+  macbuild:
+    <<: *defaults
+    macos:
+      xcode: "10.2.1"
+    steps:
+      - checkout
+      - run: brew install nodenv
+      - run: eval "$(nodenv init -)"
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: npm install
+      - run: npm run build
+      - run: npm run electron:build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist/*
+
+  linuxbuild:
+    <<: *defaults
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: npm install
+      - run: npm run build
+      - run: npm run electron:build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist/*
+
 workflows:
   version: 2
   analysis:
@@ -85,6 +141,9 @@ workflows:
           requires:
             - test
             - build
+            - windowsbuild
+            - macbuild
+            - linuxbuild
       - release:
           filters: *filter-only-master
           requires:

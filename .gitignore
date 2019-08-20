@@ -4,5 +4,6 @@ build
 docs
 .DS_Store
 dist
+release-builds
 /**/build
 /**/*.bu

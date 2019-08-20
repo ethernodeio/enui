@@ -76,7 +76,7 @@ const NodesPage: React.FC<IProps> = (props) => {
       const getUserInfo = await EnAPIhttp.getUser(token, username);
       setNodes(getUserInfo.nodes);
       setMounted(false);
-      props.history.go("/nodes");
+      props.history.go(0);
     } else {
       console.log(addNodeResult.message);
       setResult(addNodeResult.message);

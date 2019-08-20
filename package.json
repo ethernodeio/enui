@@ -1,16 +1,23 @@
 {
-  "name": "@ethernode/enui",
-  "version": "1.0.0-rc1",
-  "homepage": "https://ethernodeio.github.io/enui/",
+  "name": "enui",
+  "version": "1.0.1-rc1",
   "description": "User interface for managing nodes through enAPI",
-  "main": "build/index.js",
+  "main": "build/electron.ts",
+  "homepage": ".",
+  "author": {
+    "name": "bakon",
+    "email": "support@ethernode.io",
+    "url": "https://ethernode.io"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "tslint --fix -p .",
-    "test": "npm run lint && react-scripts test --coverage --passWithNoTests"
+    "test": "npm run lint && react-scripts test --coverage --passWithNoTests",
+    "build:electron": "tsc electron/electron.ts --outDir build",
+    "electron": "npm run build:electron && NODE_ENV=development electron build/electron.ts",
+    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never -lwm"
   },
-  "author": "bakon from ethernode",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/jest": "^24.0.13",
@@ -21,7 +28,9 @@
     "react-scripts": "^3.0.1",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.1",
+    "electron": "^6.0.2",
+    "electron-builder": "^21.2.0"
   },
   "browserslist": {
     "production": [
@@ -45,5 +54,44 @@
     "reusable": "^1.0.0-alpha.12",
     "semantic-release": "^15.13.19",
     "tslint-react-hooks": "^2.2.1"
+  },
+  "build": {
+    "productName": "enUi",
+    "appId": "io.ethernode.enui",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "tar.gz",
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "dmg": {
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    }
   }
 }
