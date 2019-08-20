@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/ethernodeio/enui/compare/1.1.1...1.1.2) (2019-08-20)
+
+
+### Bug Fixes
+
+* fixed array issue in releasrc ([f9a3287](https://github.com/ethernodeio/enui/commit/f9a3287))
+* more fixes for semantic release ([1e3709f](https://github.com/ethernodeio/enui/commit/1e3709f))
+* more fixes for semantic release ([ccdf5d0](https://github.com/ethernodeio/enui/commit/ccdf5d0))
+
 ## [1.1.1](https://github.com/ethernodeio/enui/compare/1.1.0...1.1.1) (2019-08-20)
 
 
