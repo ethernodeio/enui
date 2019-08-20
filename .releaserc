@@ -14,23 +14,25 @@
     "@semantic-release/github",
   ],
   "publish": [
-    "@semantic-release/github",
-    {
-      "assets": [
-        {
-          "path": "dist/*.tar.gz",
-          "label": "enUi-linux.tar.gz"
-        },
-        {
-          "path": "dist/*.dmg",
-          "label": "enUi-mac.dmg"
-        },
-        {
-          "path": "dist/*.exe",
-          "label": "enUi-windows.exe"
-        }
-      ]
-    }
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/*.tar.gz",
+            "label": "enUi-linux.tar.gz"
+          },
+          {
+            "path": "dist/*.dmg",
+            "label": "enUi-mac.dmg"
+          },
+          {
+            "path": "dist/*.exe",
+            "label": "enUi-windows.exe"
+          }
+        ]
+      }
+    ]
   ],
   "success": [
     "@semantic-release/github"
