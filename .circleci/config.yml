@@ -131,7 +131,6 @@ workflows:
           type: approval
           requires:
             - test
-            - build
             - linuxbuild
             - windowsbuild
             - macbuild
