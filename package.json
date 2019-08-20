@@ -14,9 +14,9 @@
     "build": "react-scripts build",
     "lint": "tslint --fix -p .",
     "test": "npm run lint && react-scripts test --coverage --passWithNoTests",
+    "electron": "npm run build && npm run build:electron && electron build/electron.js",
     "build:electron": "tsc electron/electron.ts --outDir build",
-    "electron": "npm run build:electron && NODE_ENV=development electron build/electron.ts",
-    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never -lwm"
+    "electron:build": "npm run build && npm run build:electron && electron-builder --publish never"
   },
   "license": "Apache-2.0",
   "devDependencies": {

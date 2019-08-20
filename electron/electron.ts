@@ -1,4 +1,3 @@
-
 import * as electron from "electron";
 import * as path from "path";
 
