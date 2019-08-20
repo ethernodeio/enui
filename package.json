@@ -75,7 +75,7 @@
     },
     "linux": {
       "target": [
-        "tar.gz",
+        "tar.gz"
       ],
       "category": "Development"
     },
