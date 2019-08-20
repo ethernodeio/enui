@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/ethernodeio/enui/compare/1.1.3...1.1.4) (2019-08-20)
+
+
+### Bug Fixes
+
+* added linux AppImage build ([0156377](https://github.com/ethernodeio/enui/commit/0156377))
+
 ## [1.1.3](https://github.com/ethernodeio/enui/compare/1.1.2...1.1.3) (2019-08-20)
 
 
