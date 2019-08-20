@@ -23,7 +23,7 @@
             "label": "enUi-linux.tar.gz"
           },
           {
-            "path": "dist/*.dmg",
+            "path": "dist/enUi*.dmg",
             "label": "enUi-mac.dmg"
           },
           {
