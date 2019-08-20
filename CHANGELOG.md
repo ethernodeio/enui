@@ -1,3 +1,18 @@
+# [1.1.0](https://github.com/ethernodeio/enui/compare/1.0.10...1.1.0) (2019-08-20)
+
+
+### Bug Fixes
+
+* CI yml fixes ([00111b6](https://github.com/ethernodeio/enui/commit/00111b6))
+* fixes for circle ci deployment and build in the package.json ([bcf1a0c](https://github.com/ethernodeio/enui/commit/bcf1a0c))
+* removed mac build from circle till later ([93bb3f6](https://github.com/ethernodeio/enui/commit/93bb3f6))
+* removed mac build from circle till later ([c45c6ac](https://github.com/ethernodeio/enui/commit/c45c6ac))
+
+
+### Features
+
+* App is now electron based ([cf7fbb7](https://github.com/ethernodeio/enui/commit/cf7fbb7))
+
 ## [1.0.10](https://github.com/ethernodeio/enui/compare/1.0.9...1.0.10) (2019-08-16)
 
 
