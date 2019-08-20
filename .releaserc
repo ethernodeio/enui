@@ -23,6 +23,10 @@
             "label": "enUi-linux.tar.gz"
           },
           {
+            "path": "dist/*.AppIamge",
+            "label": "enUi-linuxAppImage.AppImage"
+          },
+          {
             "path": "dist/enUi*.dmg",
             "label": "enUi-mac.dmg"
           },
