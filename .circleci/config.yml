@@ -117,8 +117,6 @@ workflows:
           filters: *filter-only-master
       - windowsbuild:
           filters: *filter-only-master
-      - macbuild:
-          filters: *filter-only-master
       - linuxbuild:
           filters: *filter-only-master
       - hold:
@@ -128,7 +126,6 @@ workflows:
             - test
             - build
             - windowsbuild
-            - macbuild
             - linuxbuild
       - release:
           filters: *filter-only-master
