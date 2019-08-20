@@ -21,6 +21,20 @@
       "msg": "github pages release",
       "src": "build/",
       "branch": "gh-pages"
+      "assets": [
+        {
+          "path": "dist/*.tar.gz",
+          "label": "enUi-linux.tar.gz"
+        },
+        {
+          "path": "dist/*.dmg",
+          "label": "enUi-mac.dmg"
+        },
+        {
+          "path": "dist/*.exe",
+          "label": "enUi-windows.exe"
+        }
+      ]
     }
   ],
   "success": [
