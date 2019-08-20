@@ -1,6 +1,6 @@
 {
   "name": "enui",
-  "version": "1.1.1-rc2",
+  "version": "1.1.2-rc2",
   "description": "User interface for managing nodes through enAPI",
   "main": "build/electron.ts",
   "homepage": ".",
@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "version": "cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]'",
     "build": "react-scripts build",
     "lint": "tslint --fix -p .",
     "test": "npm run lint && react-scripts test --coverage --passWithNoTests",

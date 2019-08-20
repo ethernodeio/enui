@@ -26,6 +26,7 @@ defaults: &defaults
   working_directory: ~/project
 
 jobs:
+
   test:
     <<: *defaults
     docker:
@@ -39,48 +40,55 @@ jobs:
       - run: ./node_modules/.bin/codecov
       - save_cache: *save-deps-cache
 
-  build:
-    <<: *defaults
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - restore_cache: *restore-deps-cache
-      - run: npm install
-      - run: npm run build
-      - save_cache: *save-deps-cache
-
   release:
     <<: *defaults
     docker:
       - image: circleci/node:10
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/project
       - restore_cache: *restore-deps-cache
-      - run: npm install
-      - run: npm run build
+      - run: ls
       - run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/npm @semantic-release/commit-analyzer @semantic-release/release-notes-generator @qiwi/semantic-release-gh-pages-plugin
-      - run: git checkout .
       - run: ./node_modules/.bin/semantic-release
       - save_cache: *save-deps-cache
+  
+  linuxbuild:
+    <<: *defaults
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: npm install
+      - run: npm run build
+      - run: npm run electron:build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist/*
 
   windowsbuild:
-      <<: *defaults
-      docker:
-        - image: electronuserland/builder:wine
-      steps:
-        - checkout
-        - run:
-            name: "Setup custom environment variables"
-            command: |
-              echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
-        - run: npm install
-        - run: npm run build
-        - run: npm run electron:build -- --win
-        - persist_to_workspace:
-            root: ~/project
-            paths:
-              - dist/*
+    <<: *defaults
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: npm install
+      - run: npm run build
+      - run: npm run electron:build -- --win
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist/*
 
   macbuild:
     <<: *defaults
@@ -102,44 +110,21 @@ jobs:
           paths:
             - dist/*
 
-  linuxbuild:
-    <<: *defaults
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - run:
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
-      - run: npm install
-      - run: npm run build
-      - run: npm run electron:build
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - dist/*
-
 workflows:
   version: 2
   analysis:
     jobs:
       - test:
           filters: *filter-only-semantic-pr
-      - build:
-          filters: *filter-only-semantic-pr
-
   release:
     jobs:
       - test:
           filters: *filter-only-master
-      - build:
+      - linuxbuild:
           filters: *filter-only-master
       - windowsbuild:
           filters: *filter-only-master
       - macbuild:
-          filters: *filter-only-master
-      - linuxbuild:
           filters: *filter-only-master
       - hold:
           filters: *filter-only-master
@@ -147,9 +132,9 @@ workflows:
           requires:
             - test
             - build
+            - linuxbuild
             - windowsbuild
             - macbuild
-            - linuxbuild
       - release:
           filters: *filter-only-master
           requires:
