@@ -1,3 +1,15 @@
+## [1.1.5](https://github.com/ethernodeio/enui/compare/1.1.4...1.1.5) (2019-08-20)
+
+
+### Bug Fixes
+
+* added register link to login page ([56697c1](https://github.com/ethernodeio/enui/commit/56697c1))
+* added text file ([5098a91](https://github.com/ethernodeio/enui/commit/5098a91))
+* changed icon in readme ([6e36505](https://github.com/ethernodeio/enui/commit/6e36505))
+* new icons ([300df28](https://github.com/ethernodeio/enui/commit/300df28))
+* small fixes for auto deplotment ([5d3a872](https://github.com/ethernodeio/enui/commit/5d3a872))
+* Update Readme ([5a80bdd](https://github.com/ethernodeio/enui/commit/5a80bdd))
+
 ## [1.1.4](https://github.com/ethernodeio/enui/compare/1.1.3...1.1.4) (2019-08-20)
 
 
