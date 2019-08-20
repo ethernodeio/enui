@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/ethernodeio/enui/compare/1.1.0...1.1.1) (2019-08-20)
+
+
+### Bug Fixes
+
+* added build stuff and release for macos ([cc336a3](https://github.com/ethernodeio/enui/commit/cc336a3))
+* added build stuff and release for macos ([66d1da6](https://github.com/ethernodeio/enui/commit/66d1da6))
+* fixed commma in config file for semantic release ([7570dde](https://github.com/ethernodeio/enui/commit/7570dde))
+
 # [1.1.0](https://github.com/ethernodeio/enui/compare/1.0.10...1.1.0) (2019-08-20)
 
 
