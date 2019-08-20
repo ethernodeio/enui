@@ -64,23 +64,23 @@ jobs:
       - run: ./node_modules/.bin/semantic-release
       - save_cache: *save-deps-cache
 
-windowsbuild:
-    <<: *defaults
-    docker:
-      - image: electronuserland/builder:wine
-    steps:
-      - checkout
-      - run:
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
-      - run: npm install
-      - run: npm run build
-      - run: npm run electron:build -- --win
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - dist/*
+  windowsbuild:
+      <<: *defaults
+      docker:
+        - image: electronuserland/builder:wine
+      steps:
+        - checkout
+        - run:
+            name: "Setup custom environment variables"
+            command: |
+              echo 'export APP_VERSION_GIT_TAG=$(npm run --silent version)' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+        - run: npm install
+        - run: npm run build
+        - run: npm run electron:build -- --win
+        - persist_to_workspace:
+            root: ~/project
+            paths:
+              - dist/*
 
   macbuild:
     <<: *defaults
@@ -134,6 +134,12 @@ workflows:
       - test:
           filters: *filter-only-master
       - build:
+          filters: *filter-only-master
+      - windowsbuild:
+          filters: *filter-only-master
+      - macbuild:
+          filters: *filter-only-master
+      - linuxbuild:
           filters: *filter-only-master
       - hold:
           filters: *filter-only-master
