@@ -49,9 +49,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RegisterPage: React.FC<IProps> = (props) => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [password2, setPassword2] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [userRole] = useState("admin");
   const [result, setResult] = useState();
   const [error, setError] = useState();
@@ -60,7 +60,8 @@ const RegisterPage: React.FC<IProps> = (props) => {
 
   const createUser = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (password === password2) {
+    if (username === "") { return setError("Blank user name"); }
+    if (password === password2 && password !== "") {
       EnAPIhttp.createUser(username, password, userRole)
         .then((authResult: any) => {
           setResult(authResult);
@@ -72,7 +73,7 @@ const RegisterPage: React.FC<IProps> = (props) => {
         })
         .catch(setError);
     } else {
-      setError("Passwords don't Match");
+      return setError("Passwords don't Match");
     }
   };
 
@@ -153,7 +154,7 @@ const RegisterPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.go()}
+            onClick={() => props.history.go("/register")}
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -173,7 +174,7 @@ const RegisterPage: React.FC<IProps> = (props) => {
           *Note: This form is only for first time users.<br />
           Please go to the <Link to="/login">Login</Link> page if you already have an account. <br />
           Or contact your admin for a new one.<br />
-          {error && <div>{error}</div>}
+          {error && <div> {error} </div>}
         </form>
       </div>
     </Container >
