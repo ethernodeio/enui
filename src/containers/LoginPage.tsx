@@ -143,7 +143,7 @@ const LoginPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.go(0)}
+            onClick={() => props.history.go()}
             variant="contained"
             color="primary"
             className={classes.submit}
