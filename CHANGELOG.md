@@ -1,3 +1,11 @@
+## [1.1.6](https://github.com/ethernodeio/enui/compare/1.1.5...1.1.6) (2019-08-21)
+
+
+### Bug Fixes
+
+* fixed save button on loging pag ([0eb1b48](https://github.com/ethernodeio/enui/commit/0eb1b48))
+* fixed save button on register page error display ([6cd82c9](https://github.com/ethernodeio/enui/commit/6cd82c9))
+
 ## [1.1.5](https://github.com/ethernodeio/enui/compare/1.1.4...1.1.5) (2019-08-20)
 
 
