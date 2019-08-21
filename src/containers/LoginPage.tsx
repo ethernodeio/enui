@@ -143,7 +143,7 @@ const LoginPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.push("/")}
+            onClick={() => props.history.go(0)}
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -162,7 +162,7 @@ const LoginPage: React.FC<IProps> = (props) => {
           </Button>
           {error && <div>{error}</div>}
         </form>
-        <small>First time <Link to="/register">register</Link></small>
+        <small>First time <Link to="/register" replace>register</Link></small>
       </div>
     </Container >
   );

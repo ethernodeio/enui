@@ -14,6 +14,8 @@ import Container from "@material-ui/core/Container";
 
 interface IProps {
   history: any;
+  to: any;
+  location: any;
 }
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -71,10 +73,14 @@ const RegisterPage: React.FC<IProps> = (props) => {
             setError(result.message);
           }
         })
-        .catch(setError);
+        .catch(() => setError);
     } else {
       return setError("Passwords don't Match");
     }
+  };
+
+  const NavLink = () => {
+    props.history.go(0);
   };
 
   const classes = useStyles();
@@ -154,7 +160,7 @@ const RegisterPage: React.FC<IProps> = (props) => {
             onChange={(event) => setPort(event.target.value)}
           />
           <Button
-            onClick={() => props.history.go("/register")}
+            onClick={() => NavLink()}
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -172,9 +178,9 @@ const RegisterPage: React.FC<IProps> = (props) => {
             Register
           </Button>
           *Note: This form is only for first time users.<br />
-          Please go to the <Link to="/login">Login</Link> page if you already have an account. <br />
+          Please go to the <Link to="/login" replace>Login</Link> page if you already have an account. <br />
           Or contact your admin for a new one.<br />
-          {error && <div> {error} </div>}
+          {error && <div>{error}</div>}
         </form>
       </div>
     </Container >
