@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/ethernodeio/enui/compare/1.1.6...1.1.7) (2019-08-22)
+
+
+### Bug Fixes
+
+* Fixed save host option and react hashroute fixes ([f8d93ce](https://github.com/ethernodeio/enui/commit/f8d93ce))
+
 ## [1.1.6](https://github.com/ethernodeio/enui/compare/1.1.5...1.1.6) (2019-08-21)
 
 
