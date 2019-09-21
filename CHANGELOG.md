@@ -1,3 +1,11 @@
+## [1.1.8](https://github.com/ethernodeio/enui/compare/1.1.7...1.1.8) (2019-09-21)
+
+
+### Bug Fixes
+
+* Node sync type selection ([20a84c1](https://github.com/ethernodeio/enui/commit/20a84c1))
+* Smoother interface ([14d4ca7](https://github.com/ethernodeio/enui/commit/14d4ca7))
+
 ## [1.1.7](https://github.com/ethernodeio/enui/compare/1.1.6...1.1.7) (2019-08-22)
 
 
