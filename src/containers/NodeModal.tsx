@@ -28,31 +28,30 @@ function getModalStyle() {
 }
 
 export default function NewNodeModal(props: IProps) {
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      paper: {
-        position: "absolute",
-        width: 600,
-        backgroundColor: theme.palette.background.paper,
-        border: "2px solid #000",
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 4),
-      },
-      formMultiGeth: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-        display: showMultiGeth,
-      },
-      submit: {
-        margin: theme.spacing(3, 0, 2),
-      },
-      clientButton: {
-        margin: "3px",
-      },
-      networkButton: {
-        margin: "3px",
-      },
-    }),
+  const useStyles = makeStyles((theme: Theme) => createStyles({
+    paper: {
+      position: "absolute",
+      width: 600,
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 4),
+    },
+    formMultiGeth: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+      display: showMultiGeth,
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    clientButton: {
+      margin: "3px",
+    },
+    networkButton: {
+      margin: "3px",
+    },
+  }),
   );
 
   // enUI hooks
@@ -65,7 +64,8 @@ export default function NewNodeModal(props: IProps) {
     rpc: false,
     websocket: false,
   });
-  const [radioValue, setRadioValue] = useState("classic");
+  const [networkRadioValue, setNetworkRadioValue] = useState("classic");
+  const [syncTypeRadioValue, setSyncTypeRadioValue] = useState("full");
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -76,13 +76,16 @@ export default function NewNodeModal(props: IProps) {
   };
   const classes = useStyles();
 
-  const handleCheckBox = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRPCCheckBox = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckBox({ ...checkBox, [name]: event.target.checked });
     console.log("rpc " + checkBox.rpc);
     console.log("ws " + checkBox.websocket);
   };
-  function handleRadioChange(event: React.ChangeEvent<unknown>) {
-    setRadioValue((event.target as HTMLInputElement).value);
+  function handleNetworkRadioChange(event: React.ChangeEvent<unknown>) {
+    setNetworkRadioValue((event.target as HTMLInputElement).value);
+  }
+  function handleSyncTypeRadioChange(event: React.ChangeEvent<unknown>) {
+    setSyncTypeRadioValue((event.target as HTMLInputElement).value);
   }
 
   return (
@@ -144,7 +147,7 @@ export default function NewNodeModal(props: IProps) {
 
             <form className={classes.formMultiGeth} noValidate>
               <h4>Multi-Geth Select Network</h4>
-              <RadioGroup aria-label="position" name="position" value={radioValue} onChange={handleRadioChange} row>
+              <RadioGroup aria-label="position" name="position" value={networkRadioValue} onChange={handleNetworkRadioChange} row>
                 <FormControlLabel
                   value="classic"
                   control={<Radio color="primary" />}
@@ -158,13 +161,34 @@ export default function NewNodeModal(props: IProps) {
                   labelPlacement="top"
                 />
               </RadioGroup>
+              <h4>Sync Type</h4>
+              <RadioGroup aria-label="position" name="position" value={syncTypeRadioValue} onChange={handleSyncTypeRadioChange} row>
+                <FormControlLabel
+                  value="light"
+                  control={<Radio color="primary" />}
+                  label="Light"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="full"
+                  control={<Radio color="primary" />}
+                  label="Full"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="archive"
+                  control={<Radio color="primary" />}
+                  label="Archive"
+                  labelPlacement="top"
+                />
+              </RadioGroup>
               <h4>Enable JSON-RPC</h4>
               <FormControlLabel
-                control={<Checkbox checked={checkBox.rpc} onChange={handleCheckBox("rpc")} value="false" />}
+                control={<Checkbox checked={checkBox.rpc} onChange={handleRPCCheckBox("rpc")} value="false" />}
                 label="Enable RPC http"
               />
               <FormControlLabel
-                control={<Checkbox checked={checkBox.websocket} onChange={handleCheckBox("websocket")} value="false" />}
+                control={<Checkbox checked={checkBox.websocket} onChange={handleRPCCheckBox("websocket")} value="false" />}
                 label="Enable RPC WS"
               />
               <TextField
@@ -185,7 +209,7 @@ export default function NewNodeModal(props: IProps) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={() => { props.addNode(nodeName, radioValue, "fast", checkBox.rpc, checkBox.websocket); }}
+                onClick={() => { props.addNode(nodeName, networkRadioValue, syncTypeRadioValue, checkBox.rpc, checkBox.websocket); }}
               >
                 Create Node
                 </Button>

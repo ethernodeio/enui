@@ -7,6 +7,7 @@ import { EnAPIhttp } from "../api/EnApi";
 import { NavigationBar } from "../components/navigationComponent";
 import NodeList from "../components/nodeComponents";
 import NodeModal from "./NodeModal";
+import useInterval from "use-interval";
 
 interface IProps {
   history: any;
@@ -31,26 +32,27 @@ const NodesPage: React.FC<IProps> = (props) => {
   const getNodes = () => {
     EnAPIhttp.getUser(token, username).then((userInfoResult) => {
       setNodes(userInfoResult.nodes);
+      console.log(userInfoResult);
       if (userInfoResult.nodes.length === 0) { setMounted(false); }
       nodes.map((node: any, index: any) => {
         EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_version", [], 67).then((versionResult) => {
-          // tslint:disable-next-line: no-string-literal
           node.version = versionResult.result;
           setNodes(nodes);
         });
         EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_syncing", [], 67).then((syncResult) => {
           if (syncResult.result !== false) {
-            // tslint:disable-next-line: no-string-literal
             node.sync = syncResult.result;
             setNodes(nodes);
           } else {
             node.sync = "false";
-            setNodes(nodes);
+            EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_blockNumber", [], 67).then((blockNumber) => {
+              node.blockNumber = blockNumber.result;
+              setNodes(nodes);
+            });
           }
           setMounted(false);
         });
         EnAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "web3_clientVersion", [], 67).then((clientVersionResult) => {
-          // tslint:disable-next-line: no-string-literal
           node.clientversion = clientVersionResult.result;
           setNodes(nodes);
         });
@@ -68,6 +70,9 @@ const NodesPage: React.FC<IProps> = (props) => {
   function testNode() {
     console.log("hello from modal");
   }
+  useInterval(() => {
+    getNodes();
+  }, 7000);
 
   async function addNode(nodeName: string, nodeNetwork: string, syncType: string, enableRpc: boolean, enableWS: boolean) {
     const addNodeResult = await EnAPIhttp.addNode(token, username, nodeName, nodeNetwork, syncType, enableRpc, enableWS);
@@ -75,8 +80,7 @@ const NodesPage: React.FC<IProps> = (props) => {
     if (addNodeResult && addNodeResult.status === "success") {
       const getUserInfo = await EnAPIhttp.getUser(token, username);
       setNodes(getUserInfo.nodes);
-      setMounted(false);
-      props.history.go(0);
+      getNodes();
     } else {
       console.log(addNodeResult.message);
       setResult(addNodeResult.message);
