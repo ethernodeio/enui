@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { EnAPIhttp } from "../api/EnApi";
+import { enAPIhttp } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { useNode } from "../stores/useNodesStore";
 import { useToken } from "../stores/useTokenStore";
@@ -66,7 +66,7 @@ const LoginPage: React.FC<IProps> = (props) => {
     if (username.length < 3 || password.length < 3) {
       setError("Username or Password too short");
     } else {
-      const authResult = await EnAPIhttp.login(username, password);
+      const authResult = await enAPIhttp.login(username, password);
       if (authResult.status === "success") {
         setUsername(authResult.userName);
         setToken(authResult.token);

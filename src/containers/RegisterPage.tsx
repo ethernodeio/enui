@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EnAPIhttp } from "../api/EnApi";
+import { enAPIhttp } from "../api/EnApi";
 import { usePort, useHostname } from "../stores/useTransportStore";
 import { Link } from "react-router-dom";
 
@@ -64,7 +64,7 @@ const RegisterPage: React.FC<IProps> = (props) => {
     event.preventDefault();
     if (username === "") { return setError("Blank user name"); }
     if (password === password2 && password !== "") {
-      EnAPIhttp.createUser(username, password, userRole)
+      enAPIhttp.createUser(username, password, userRole)
         .then((authResult: any) => {
           setResult(authResult);
           if (authResult.status === "success") {

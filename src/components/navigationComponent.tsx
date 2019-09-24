@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/images/icon.png";
 import "../index.css";
-import { Link } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AccountBoxIcon from "@material-ui/icons/AccountBoxRounded";
 import NodeIcon from "@material-ui/icons/StorageSharp";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(1),
     },
     title: {
       flexGrow: 1,
@@ -27,10 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#fff",
     },
     menuButton2: {
-      border: 0,
+      background: "black",
       color: "white",
-      height: 24,
-      margin: "0 5px",
+      margin: "0 2px",
     },
   }),
 );
@@ -54,7 +54,7 @@ export function NavigationBar(props: IProps) {
           </Typography>
           <Link to="/main"><Button className={classes.menuButton2}><AccountBoxIcon /></Button></Link>
           <Link to="/nodes"><Button className={classes.menuButton2}><NodeIcon /></Button></Link>
-          <Link to="/login"><Button className={classes.menuButton2}>Logout</Button></Link>
+          <Link to="/login"><Button className={classes.menuButton2}><ExitToAppIcon /></Button></Link>
         </Toolbar>
       </AppBar>
     </nav>

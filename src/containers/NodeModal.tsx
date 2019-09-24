@@ -5,15 +5,14 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Checkbox from "@material-ui/core/Checkbox";
-
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 interface IProps {
   addNode: any;
   getNodes: any;
-  testNode: any;
 }
 
 function getModalStyle() {
@@ -50,6 +49,11 @@ export default function NewNodeModal(props: IProps) {
     },
     networkButton: {
       margin: "3px",
+    },
+    button: {
+      margin: theme.spacing(3, 0, 2),
+      background: "black",
+      color: "white",
     },
   }),
   );
@@ -90,12 +94,12 @@ export default function NewNodeModal(props: IProps) {
 
   return (
     <div>
-      <button
-        type="button"
+      <Button
+        className={classes.button}
         onClick={handleOpenModal}
       >
-        Add Node
-      </button>
+        <AddBoxIcon />
+      </Button>
       <Modal
         aria-labelledby="Add Node"
         aria-describedby="Spin up a Ethereum Node"
@@ -160,6 +164,12 @@ export default function NewNodeModal(props: IProps) {
                   label="Kotti"
                   labelPlacement="top"
                 />
+                <FormControlLabel
+                  value="ethnet"
+                  control={<Radio color="primary" />}
+                  label="ETH"
+                  labelPlacement="top"
+                />
               </RadioGroup>
               <h4>Sync Type</h4>
               <RadioGroup aria-label="position" name="position" value={syncTypeRadioValue} onChange={handleSyncTypeRadioChange} row>
@@ -167,6 +177,12 @@ export default function NewNodeModal(props: IProps) {
                   value="light"
                   control={<Radio color="primary" />}
                   label="Light"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="fast"
+                  control={<Radio color="primary" />}
+                  label="Fast"
                   labelPlacement="top"
                 />
                 <FormControlLabel
