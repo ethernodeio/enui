@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { enAPIhttp, enAPIwebSocket } from "../api/EnApi";
+import React from "react";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { useNode } from "../stores/useNodesStore";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
@@ -23,48 +21,39 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
-const MainPage: React.FC = () => {
+const DevicesPage: React.FC = () => {
   const [username] = useUsername();
-  const [nodes, setNodes] = useNode();
   const classes = useStyles();
-
-  useEffect(() => {
-    enAPIwebSocket.onNotification((data) => console.log(data));
-  }, []);
 
   return (
     <div className={classes.root}>
-      <NavigationBar title={"Home - Welcome to enUI " + username} />
+      <NavigationBar title={"Devices - Welcome to enUI " + username} />
 
       <Grid container spacing={1}>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <Typography>
-              Running Nodes
+              Device 1
             </Typography>
-            <Typography>{nodes.length}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <Typography>
-              Running IoT Devices
+              Device 2
             </Typography>
-            <Typography>{nodes.length}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <Typography>
-              Latest Updates
+              Device 3
             </Typography>
-            <Typography>We Has Nodes</Typography>
           </Paper>
         </Grid>
       </Grid>
-
     </div>
   );
 };
 
-export default MainPage;
+export default DevicesPage;

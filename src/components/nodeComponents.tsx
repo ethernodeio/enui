@@ -1,15 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNode } from "../stores/useNodesStore";
-import { usePort, useHostname } from "../stores/useTransportStore";
+import { useHostname } from "../stores/useTransportStore";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import hextToString from "../helpers/hexToString";
-import hexToNumber from "../helpers/hexToNumber";
-import hexToDate from "../helpers/hexToDate";
+import { hexToString, hexToDate, hexToNumber } from "@etclabscore/eserialize";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "white",
       border: "1px solid green",
       boxShadow: theme.shadows[5],
+      minHeight: "400px",
     },
     menuButton: {
       margin: theme.spacing(1, 1, 1),
@@ -39,8 +37,8 @@ interface IProps {
 function NodeList(props: IProps) {
 
   const [nodes] = useNode();
+  const [hostName] = useHostname();
   const classes = useStyles();
-  const [hostName, setHostName] = useHostname();
 
   function openLink(rpcPort: any) {
     window.open("http://" + hostName + ":8422/?rpcUrl=http://" + hostName + ":" + rpcPort);
@@ -49,7 +47,7 @@ function NodeList(props: IProps) {
   return (
     <Grid container spacing={1}>
       {
-        nodes.map((node: { nodeId: any; nodeName: any; nodeNetwork: any, version: any, chainid: any, sync: any, clientversion: any, blockNumber: any, peers: any, rpcPort: any, wsPort: any, blockinfo: any }, index: any) => (
+        nodes && nodes.map((node: { nodeId: any; nodeName: any; nodeNetwork: any, version: any, chainid: any, sync: any, clientversion: any, blockNumber: any, peers: any, rpcPort: any, wsPort: any, blockinfo: any }, index: any) => (
           <Grid item xs={3}>
             <Paper className={classes.paper} key={index} id={index}>
               <Typography variant="h5">{node.nodeName}</Typography>
@@ -74,18 +72,18 @@ function NodeList(props: IProps) {
                     {
                       node.blockinfo &&
                       <div>
-                        <Typography>Time Mined: {hexToDate(node.blockinfo.timestamp)}</Typography>
+                        <Typography>Time Mined: {hexToDate(node.blockinfo.timestamp).toISOString()}</Typography>
                         <Typography>Difficulty: {hexToNumber(node.blockinfo.difficulty)}</Typography>
                         <Typography>Total Difficulty: {hexToNumber(node.blockinfo.totalDifficulty)}</Typography>
                         <Typography>Gas Used: {hexToNumber(node.blockinfo.gasUsed)}</Typography>
-                        <Typography>Miner Name: {hextToString(node.blockinfo.extraData)}</Typography>
+                        <Typography>Miner Name: {hexToString(node.blockinfo.extraData)}</Typography>
                         <Typography>Miner Address: {node.blockinfo.miner}</Typography>
                       </div>
                     }
                   </Paper>
               }
               <Button onClick={() => openLink(node.rpcPort)} className={classes.menuButton}>View on Jade Explorer</Button>
-              <Button className={classes.menuButton} onClick={() => props.removeNodes(node.nodeId, node.nodeName, false)}>Remove Node</Button>
+              <Button className={classes.menuButton} onClick={() => props.removeNodes(node.nodeId, node.nodeName, true)}>Remove Node</Button>
               <Typography><small>{node.clientversion}</small></Typography>
             </Paper>
           </Grid>

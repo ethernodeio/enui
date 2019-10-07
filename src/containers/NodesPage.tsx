@@ -28,26 +28,36 @@ const NodesPage: React.FC<IProps> = (props) => {
   const [mounted, setMounted] = useState(true);
   const [result, setResult] = useState();
   const classes = useStyles();
-  const [open, setOpen] = React.useState();
 
   const getNodes = () => {
     enAPIhttp.getUser(token, username).then((userInfoResult) => {
       setNodes(userInfoResult.nodes);
-      if (userInfoResult.nodes.length === 0) { setMounted(false); }
       nodes.map((node: any, index: any) => {
+        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "web3_clientVersion", [], 67).then((clientVersionResult) => {
+          node.clientversion = clientVersionResult.result;
+        });
+        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_chainId", [], 67).then((chainIdResult) => {
+          node.chainid = chainIdResult.result;
+        });
         enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_version", [], 60).then((versionResult) => {
           node.version = versionResult.result;
-          setNodes(nodes);
+        });
+        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_peerCount", [], 67).then((netPeerCountResult) => {
+          node.peers = netPeerCountResult.result;
+        });
+        enAPIhttp.getNodeContainerInfo(token, node.nodeId).then((conatinerInfoResult) => {
+          node.rpcPort = conatinerInfoResult.rpcPort;
+          node.wsPort = conatinerInfoResult.wsPort;
         });
         enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_syncing", [], 61).then((syncResult) => {
           if (syncResult.result !== false) {
             node.sync = syncResult.result;
+            console.log(syncResult.result);
             setNodes(nodes);
           } else {
             node.sync = "false";
             enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_blockNumber", [], 62).then((blockNumberResult) => {
               node.blockNumber = blockNumberResult.result;
-              setNodes(nodes);
               enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_getBlockByNumber", [blockNumberResult.result, true], 63).then((getBlockByNumResult) => {
                 node.blockinfo = getBlockByNumResult.result;
                 console.log(getBlockByNumResult.result);
@@ -56,33 +66,16 @@ const NodesPage: React.FC<IProps> = (props) => {
             });
           }
         });
-        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_chainId", [], 67).then((chainIdResult) => {
-          node.chainid = chainIdResult.result;
-          setNodes(nodes);
-        });
-        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "web3_clientVersion", [], 67).then((clientVersionResult) => {
-          node.clientversion = clientVersionResult.result;
-          setNodes(nodes);
-        });
-        enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "net_peerCount", [], 67).then((netPeerCountResult) => {
-          node.peers = netPeerCountResult.result;
-          setNodes(nodes);
-        });
-        enAPIhttp.getNodeContainerInfo(token, node.nodeId).then((conatinerInfoResult) => {
-          node.rpcPort = conatinerInfoResult[0].rpcPort;
-          node.wsPort = conatinerInfoResult[0].wsPort;
-        });
-        setMounted(false);
       });
     });
   };
 
   async function addNode(nodeName: string, nodeNetwork: string, syncType: string, enableRpc: boolean, enableWS: boolean) {
     const addNodeResult = await enAPIhttp.addNode(token, username, nodeName, nodeNetwork, syncType, enableRpc, enableWS);
+    console.log(addNodeResult);
     if (addNodeResult && addNodeResult.status === "success") {
       const getUserInfo = await enAPIhttp.getUser(token, username);
       setNodes(getUserInfo.nodes);
-      props.history.go(0);
     } else {
       setResult(addNodeResult.message);
     }
@@ -102,12 +95,13 @@ const NodesPage: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     getNodes();
-    if (nodes.length === 0) { return; }
-  }, [mounted && nodes]);
+  }, []);
 
+  /*
   useInterval(() => {
     getNodes();
-  }, 7000);
+  }, 8000);
+  */
 
   return (
     <div className={classes.root} >

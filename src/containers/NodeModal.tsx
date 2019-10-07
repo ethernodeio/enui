@@ -82,8 +82,6 @@ export default function NewNodeModal(props: IProps) {
 
   const handleRPCCheckBox = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckBox({ ...checkBox, [name]: event.target.checked });
-    console.log("rpc " + checkBox.rpc);
-    console.log("ws " + checkBox.websocket);
   };
   function handleNetworkRadioChange(event: React.ChangeEvent<unknown>) {
     setNetworkRadioValue((event.target as HTMLInputElement).value);
@@ -200,11 +198,11 @@ export default function NewNodeModal(props: IProps) {
               </RadioGroup>
               <h4>Enable JSON-RPC</h4>
               <FormControlLabel
-                control={<Checkbox checked={checkBox.rpc} onChange={handleRPCCheckBox("rpc")} value="false" />}
+                control={<Checkbox checked={checkBox.rpc} onChange={handleRPCCheckBox("rpc")} value={false} />}
                 label="Enable RPC http"
               />
               <FormControlLabel
-                control={<Checkbox checked={checkBox.websocket} onChange={handleRPCCheckBox("websocket")} value="false" />}
+                control={<Checkbox checked={checkBox.websocket} onChange={handleRPCCheckBox("websocket")} value={false} />}
                 label="Enable RPC WS"
               />
               <TextField

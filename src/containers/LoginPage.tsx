@@ -74,7 +74,8 @@ const LoginPage: React.FC<IProps> = (props) => {
         props.history.push("/main");
         return (token + nodes);
       } else {
-        setError(authResult.message);
+        console.log(authResult);
+        setError(authResult.error.data);
       }
     }
   }

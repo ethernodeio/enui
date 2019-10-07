@@ -10,3 +10,11 @@ export const enAPIhttp = new EnAPI({
     port: newPort,
   },
 });
+
+export const enAPIwebSocket = new EnAPI({
+  transport: {
+    type: "websocket",
+    host: "192.168.1.110",
+    port: 8421,
+  },
+});

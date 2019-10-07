@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountBoxIcon from "@material-ui/icons/AccountBoxRounded";
 import NodeIcon from "@material-ui/icons/StorageSharp";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import DevicesOtherIcon from "@material-ui/icons/DevicesOther";
+import MessageIcon from "@material-ui/icons/Message";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +56,9 @@ export function NavigationBar(props: IProps) {
           </Typography>
           <Link to="/main"><Button className={classes.menuButton2}><AccountBoxIcon /></Button></Link>
           <Link to="/nodes"><Button className={classes.menuButton2}><NodeIcon /></Button></Link>
+          <Link to="/jade"><Button className={classes.menuButton2}>JADE</Button></Link>
+          <Link to="/devices"><Button className={classes.menuButton2}><DevicesOtherIcon /> </Button></Link>
+          <Link to="/chat"><Button className={classes.menuButton2}><MessageIcon /></Button></Link>
           <Link to="/login"><Button className={classes.menuButton2}><ExitToAppIcon /></Button></Link>
         </Toolbar>
       </AppBar>

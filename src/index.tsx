@@ -6,6 +6,9 @@ import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
 import MainPage from "./containers/MainPage";
 import NodesPage from "./containers/NodesPage";
+import DevicesPage from "./containers/DevicesPage";
+import ChatPage from "./containers/ChatPage";
+import JadeServicesPage from "./containers/JadeServicesPage";
 import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 
 const routing = (
@@ -19,6 +22,9 @@ const routing = (
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/nodes" component={NodesPage} />
+        <Route path="/devices" component={DevicesPage} />
+        <Route path="/chat" component={ChatPage} />
+        <Route path="/jade" component={JadeServicesPage} />
       </Switch>
     </HashRouter>
   </ReusableProvider>
