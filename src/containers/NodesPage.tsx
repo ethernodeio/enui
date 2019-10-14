@@ -24,7 +24,7 @@ const NodesPage: React.FC<IProps> = (props) => {
 
   const [username] = useUsername();
   const [nodes, setNodes] = useNode();
-  const [, token] = useToken();
+  const [token] = useToken();
   const [result, setResult] = useState();
   const classes = useStyles();
 
