@@ -7,7 +7,7 @@ import { enAPIhttp } from "../api/EnApi";
 import { NavigationBar } from "../components/navigationComponent";
 import NodeList from "../components/nodeComponents";
 import NodeModal from "./NodeModal";
-import useInterval from "use-interval";
+// import useInterval from "use-interval";
 
 interface IProps {
   history: any;
@@ -25,7 +25,6 @@ const NodesPage: React.FC<IProps> = (props) => {
   const [username] = useUsername();
   const [nodes, setNodes] = useNode();
   const [token] = useToken();
-  const [mounted, setMounted] = useState(true);
   const [result, setResult] = useState();
   const classes = useStyles();
 
@@ -66,6 +65,7 @@ const NodesPage: React.FC<IProps> = (props) => {
             });
           }
         });
+        return nodes;
       });
     });
   };
@@ -86,7 +86,6 @@ const NodesPage: React.FC<IProps> = (props) => {
     if (removeNodeResult && removeNodeResult.status === "success") {
       const getUserInfo = await enAPIhttp.getUser(token, username);
       setNodes(getUserInfo.nodes);
-      setMounted(false);
 
     } else {
       setResult(removeNodeResult.message);
@@ -95,6 +94,7 @@ const NodesPage: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     getNodes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*
@@ -105,7 +105,7 @@ const NodesPage: React.FC<IProps> = (props) => {
 
   return (
     <div className={classes.root} >
-      <NavigationBar title={"Nodes - Hello " + username + " these are your running nodes: "} />
+      <NavigationBar title={"Docker Nodes - " + username + " these are your nodes running in docker containers"} />
       {nodes ? <NodeList removeNodes={removeNodes} /> : < div > Loading Nodes</div>}
       <NodeModal addNode={addNode} getNodes={getNodes} />
       {result && <div>{result}</div>}

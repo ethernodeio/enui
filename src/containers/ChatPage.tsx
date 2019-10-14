@@ -1,33 +1,27 @@
 import React, { useState } from "react";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
-import { useNode } from "../stores/useNodesStore";
 import { enAPIhttp, enAPIwebSocket } from "../api/EnApi";
-import { usePort, useHostname } from "../stores/useTransportStore";
-import { Link } from "react-router-dom";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import MessageIcon from "@material-ui/icons/Message";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 const ChatPage: React.FC = () => {
   const [username] = useUsername();
-  const [nodes, setNodes] = useNode();
   const [symKeyPass, setSymkeyPass] = useState("");
   const [symKey, setSymKey] = useState();
   const [symKeyId, setSymKeyId] = useState();
   const [keyPair, setKeyPair] = useState();
-  const [error, setError] = useState();
+  const [error] = useState();
   const [showChat, setShowChat] = useState("none");
-  const [newMsg, setNewMsg] = useState()
+  const [newMsg, setNewMsg] = useState();
 
   const useStyles = makeStyles((theme) => ({
     "@global": {
@@ -72,21 +66,21 @@ const ChatPage: React.FC = () => {
 
   async function sendMessage() {
     const newMessage = await enAPIhttp.ethRpcCall(username, "kotti", "kotti", "shh_post", [{
-      "symKeyID": symKeyId,
-      "sig": keyPair,
-      "ttl": 120,
-      "topic": "0x07678231",
-      "payload": "0x68656c6c6f",
-      "powTarget": 3.01,
-      "powTime": 3,
+      symKeyID: symKeyId,
+      sig: keyPair,
+      ttl: 120,
+      topic: "0x07678231",
+      payload: "0x68656c6c6f",
+      powTarget: 3.01,
+      powTime: 3,
     }], 62);
     console.log(newMessage);
   }
 
   async function getKeys() {
-    enAPIwebSocket.onNotification((data) => { console.log(data) });
+    enAPIwebSocket.onNotification((data) => { console.log(data); });
     const newSymKeyResult = await enAPIhttp.ethRpcCall(username, "kotti", "kotti", "shh_generateSymKeyFromPassword", [symKeyPass], 88);
-    setSymKey(newSymKeyResult.result);
+    setSymKey([symKey, newSymKeyResult.result]);
     console.log(newSymKeyResult.result);
     const setNewSymKey = await enAPIhttp.ethRpcCall(username, "kotti", "kotti", "shh_addSymKey", ["0x" + newSymKeyResult.result], 89);
     setSymKeyId(setNewSymKey.result);

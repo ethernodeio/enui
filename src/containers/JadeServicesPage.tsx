@@ -3,7 +3,6 @@ import { enAPIhttp } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import { useNode } from "../stores/useNodesStore";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+    },
+    list: {
+      width: "100%",
+      maxWidth: 360,
     },
     paper: {
       padding: theme.spacing(2, 2, 5),
@@ -46,7 +49,7 @@ const JadeServicesPage: React.FC = () => {
 
   const classes = useStyles();
 
-  const listServices = async () => {
+  const listServices = () => {
     enAPIhttp.listServices("available").then((availableServicesResult) => {
       setServices(availableServicesResult);
       console.log(services);
@@ -65,24 +68,24 @@ const JadeServicesPage: React.FC = () => {
 
   useEffect(() => {
     listServices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [services.length, runningServices.length, installedServices.length]);
-
   return (
     <div className={classes.root}>
-      <NavigationBar title={"Jade Services - for user: " + username} />
+      <NavigationBar title={"Jade Services - " + username + " these are your running JADE services"} />
       <Grid container spacing={1}>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <div>
               <Typography variant="h5">Services Available: {services.length}</Typography>
             </div>
-            <List className={classes.root}>
+            <List className={classes.list}>
               {
                 services && services.map((service: { name: any, version: any }, index: any) => (
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        <StorageIcon />
+                        <AddBoxIcon />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={service.name} secondary={service.version} />
@@ -95,7 +98,7 @@ const JadeServicesPage: React.FC = () => {
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <Typography variant="h5">Services Running: {runningServices.length}</Typography>
-            <List className={classes.root}>
+            <List className={classes.list}>
               {
                 runningServices && runningServices.map((serviceRunning: { name: any, version: any, state: any }, index: any) => (
                   <ListItem>
@@ -114,13 +117,13 @@ const JadeServicesPage: React.FC = () => {
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             <Typography variant="h5">Services Installed: {installedServices.length}</Typography>
-            <List className={classes.root}>
+            <List className={classes.list}>
               {
                 installedServices && installedServices.map((installedService: { name: any, version: any, state: any }, index: any) => (
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        <StorageIcon />
+                        <DirectionsRunIcon />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={installedService.name} secondary={installedService.version} />

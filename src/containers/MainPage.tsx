@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { enAPIhttp, enAPIwebSocket } from "../api/EnApi";
+import React, { useEffect } from "react";
+import { enAPIwebSocket } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MainPage: React.FC = () => {
   const [username] = useUsername();
-  const [nodes, setNodes] = useNode();
+  const nodes = useNode();
   const classes = useStyles();
 
   useEffect(() => {
