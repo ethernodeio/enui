@@ -4,7 +4,8 @@
     "tslint-react-hooks"
   ],
   "rules": {
-    "no-unused-variable": false,
+    "exhaustive-deps": false,
+    "no-unused-variable": true,
     "react-hooks-nesting": "warning",
     "ordered-imports": false,
     "object-literal-sort-keys": false,

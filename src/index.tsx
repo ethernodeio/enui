@@ -32,13 +32,3 @@ const routing = (
 
 ReactDOM.render(routing, document.getElementById("root"));
 
-// use this with protected routes
-/*
-<Route exact path="/" render={() => (
-  loggedIn ? (
-    <Redirect to="/searchDashboard"/>
-  ) : (
-    <Redirect to="/login"/>
-  )
-)}/>
-*/
