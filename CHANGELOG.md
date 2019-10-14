@@ -1,3 +1,14 @@
+## [1.1.9](https://github.com/ethernodeio/enui/compare/1.1.8...1.1.9) (2019-10-14)
+
+
+### Bug Fixes
+
+* fixed jwt error token ([c976e2c](https://github.com/ethernodeio/enui/commit/c976e2c475065ef11189963838756dfba296d3ec))
+* no release yet lots of addons for service-runner-support ([fe25931](https://github.com/ethernodeio/enui/commit/fe25931da8289b40e6c37cf802f3dda584bc0b46))
+* small features on par with enapi ([ff8ba2b](https://github.com/ethernodeio/enui/commit/ff8ba2b7e8964a0603b6ef911bd9b93efa019d43))
+* support for jade-service-runner on the enkeep ([763b9e7](https://github.com/ethernodeio/enui/commit/763b9e7b25f0f085ab35127a8227f4d733342096))
+* UI improvments added support for jade-explorer ([7d0a115](https://github.com/ethernodeio/enui/commit/7d0a1159b9c1aa5eee93290951137f470708dd96))
+
 ## [1.1.8](https://github.com/ethernodeio/enui/compare/1.1.7...1.1.8) (2019-09-21)
 
 
