@@ -9,6 +9,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import useStyles from "../theme";
 
 interface IProps {
   addNode: any;
@@ -18,7 +19,6 @@ interface IProps {
 function getModalStyle() {
   const top = 50;
   const left = 50;
-
   return {
     top: `${top}%`,
     left: `${left}%`,
@@ -27,33 +27,11 @@ function getModalStyle() {
 }
 
 export default function NewNodeModal(props: IProps) {
-  const useStyles = makeStyles((theme: Theme) => createStyles({
-    paper: {
-      position: "absolute",
-      width: 600,
-      backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 4),
-    },
+  const nodeStyles = makeStyles((theme: Theme) => createStyles({
     formMultiGeth: {
       width: "100%", // Fix IE 11 issue.
       marginTop: theme.spacing(1),
       display: showMultiGeth,
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-    clientButton: {
-      margin: "3px",
-    },
-    networkButton: {
-      margin: "3px",
-    },
-    button: {
-      margin: theme.spacing(3, 0, 2),
-      background: "black",
-      color: "white",
     },
   }),
   );
@@ -79,6 +57,7 @@ export default function NewNodeModal(props: IProps) {
     setOpen(false);
   };
   const classes = useStyles();
+  const nodeClass = nodeStyles();
 
   const handleRPCCheckBox = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckBox({ ...checkBox, [name]: event.target.checked });
@@ -93,7 +72,7 @@ export default function NewNodeModal(props: IProps) {
   return (
     <div>
       <Button
-        className={classes.button}
+        className={classes.menuButton2}
         onClick={handleOpenModal}
       >
         <AddBoxIcon />
@@ -104,7 +83,7 @@ export default function NewNodeModal(props: IProps) {
         open={open}
         onClose={handleCloseModal}
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div style={modalStyle} className={classes.nodemodalpaper}>
           <h2 id="simple-modal-title">Spin up a Ethereum Node Client</h2>
 
           <Container fixed>
@@ -147,7 +126,7 @@ export default function NewNodeModal(props: IProps) {
               </Button>
             </div>
 
-            <form className={classes.formMultiGeth} noValidate>
+            <form className={nodeClass.formMultiGeth} noValidate>
               <h4>Multi-Geth Select Network</h4>
               <RadioGroup aria-label="position" name="position" value={networkRadioValue} onChange={handleNetworkRadioChange} row>
                 <FormControlLabel
@@ -226,7 +205,7 @@ export default function NewNodeModal(props: IProps) {
                 onClick={() => { props.addNode(nodeName, networkRadioValue, syncTypeRadioValue, checkBox.rpc, checkBox.websocket); }}
               >
                 Create Node
-                </Button>
+              </Button>
             </form>
           </Container>
         </div>

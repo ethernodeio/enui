@@ -11,6 +11,7 @@ export const enAPIhttp = new EnAPI({
   },
 });
 
+/*
 export const enAPIwebSocket = new EnAPI({
   transport: {
     type: "websocket",
@@ -18,3 +19,4 @@ export const enAPIwebSocket = new EnAPI({
     port: 8421,
   },
 });
+*/

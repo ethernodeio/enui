@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import "./index.css";
 import { ReusableProvider } from "reusable";
 import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
@@ -31,4 +30,3 @@ const routing = (
 );
 
 ReactDOM.render(routing, document.getElementById("root"));
-

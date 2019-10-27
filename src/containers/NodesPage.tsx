@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useUsername } from "../stores/useCredsStore";
 import { useNode } from "../stores/useNodesStore";
 import { useToken } from "../stores/useTokenStore";
@@ -7,21 +6,14 @@ import { enAPIhttp } from "../api/EnApi";
 import { NavigationBar } from "../components/navigationComponent";
 import NodeList from "../components/nodeComponents";
 import NodeModal from "./NodeModal";
-// import useInterval from "use-interval";
+import useInterval from "use-interval";
+import useStyles from "../theme";
 
 interface IProps {
   history: any;
 }
 
 const NodesPage: React.FC<IProps> = (props) => {
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        flexGrow: 1,
-      },
-    }),
-  );
-
   const [username] = useUsername();
   const [nodes, setNodes] = useNode();
   const [token] = useToken();
@@ -51,7 +43,6 @@ const NodesPage: React.FC<IProps> = (props) => {
         enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_syncing", [], 61).then((syncResult) => {
           if (syncResult.result !== false) {
             node.sync = syncResult.result;
-            console.log(syncResult.result);
             setNodes(nodes);
           } else {
             node.sync = "false";
@@ -59,7 +50,6 @@ const NodesPage: React.FC<IProps> = (props) => {
               node.blockNumber = blockNumberResult.result;
               enAPIhttp.ethRpcCall(username, node.nodeName, node.nodeNetwork, "eth_getBlockByNumber", [blockNumberResult.result, true], 63).then((getBlockByNumResult) => {
                 node.blockinfo = getBlockByNumResult.result;
-                console.log(getBlockByNumResult.result);
                 setNodes(nodes);
               });
             });
@@ -72,7 +62,6 @@ const NodesPage: React.FC<IProps> = (props) => {
 
   async function addNode(nodeName: string, nodeNetwork: string, syncType: string, enableRpc: boolean, enableWS: boolean) {
     const addNodeResult = await enAPIhttp.addNode(token, username, nodeName, nodeNetwork, syncType, enableRpc, enableWS);
-    console.log(addNodeResult);
     if (addNodeResult && addNodeResult.status === "success") {
       const getUserInfo = await enAPIhttp.getUser(token, username);
       setNodes(getUserInfo.nodes);
@@ -97,11 +86,9 @@ const NodesPage: React.FC<IProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /*
   useInterval(() => {
     getNodes();
-  }, 8000);
-  */
+  }, 10000);
 
   return (
     <div className={classes.root} >
