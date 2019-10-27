@@ -21,12 +21,14 @@ const MainPage: React.FC = () => {
   const getSystemInfo = async () => {
     const getSysInfoResult = await enAPIhttp.getSysInfo(token);
     setSysInfo(getSysInfoResult);
-    return sysInfo;
+    return getSysInfoResult;
   };
 
   useEffect(() => {
-    getSystemInfo();
-  });
+    enAPIhttp.getSysInfo(token).then((sysInfoResult) => {
+      setSysInfo(sysInfoResult);
+    });
+  }, [token]);
 
   useInterval(() => {
     getSystemInfo();
