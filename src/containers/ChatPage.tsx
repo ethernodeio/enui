@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
-import { enAPIhttp, enAPIwebSocket } from "../api/EnApi";
+import { enAPIhttp } from "../api/EnApi";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -78,7 +78,7 @@ const ChatPage: React.FC = () => {
   }
 
   async function getKeys() {
-    enAPIwebSocket.onNotification((data) => { console.log(data); });
+    // enAPIwebSocket.onNotification((data) => { console.log(data); });
     const newSymKeyResult = await enAPIhttp.ethRpcCall(username, "kotti", "kotti", "shh_generateSymKeyFromPassword", [symKeyPass], 88);
     setSymKey([symKey, newSymKeyResult.result]);
     console.log(newSymKeyResult.result);

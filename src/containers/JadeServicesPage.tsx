@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { enAPIhttp } from "../api/EnApi";
 import { useUsername } from "../stores/useCredsStore";
 import { NavigationBar } from "../components/navigationComponent";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -15,38 +14,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import StorageIcon from "@material-ui/icons/Storage";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    list: {
-      width: "100%",
-      maxWidth: 360,
-    },
-    paper: {
-      padding: theme.spacing(2, 2, 5),
-      margin: theme.spacing(1, 0, 1),
-      background: "green",
-      color: "white",
-      border: "1px solid green",
-      boxShadow: theme.shadows[5],
-    },
-    button: {
-      margin: theme.spacing(3, 0, 2),
-      background: "green",
-      color: "black",
-      marginRight: theme.spacing(1),
-    },
-  }));
+import useStyles from "../theme";
 
 const JadeServicesPage: React.FC = () => {
   const [username] = useUsername();
   const [services, setServices] = useState<any[]>([]);
   const [runningServices, setRunningServices] = useState<any[]>([]);
   const [installedServices, setInstalledServices] = useState<any[]>([]);
-
   const classes = useStyles();
 
   const listServices = () => {
@@ -135,12 +109,12 @@ const JadeServicesPage: React.FC = () => {
         </Grid>
       </Grid>
       <Button
-        className={classes.button}
+        className={classes.menuButton}
       >
         <AddBoxIcon />
       </Button>
       <Button
-        className={classes.button}
+        className={classes.menuButton}
       >
         <DirectionsRunIcon />
       </Button>

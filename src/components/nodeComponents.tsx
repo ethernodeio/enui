@@ -47,7 +47,7 @@ function NodeList(props: IProps) {
   return (
     <Grid container spacing={1}>
       {
-        nodes && nodes.map((node: { nodeId: any; nodeName: any; nodeNetwork: any, version: any, chainid: any, sync: any, clientversion: any, blockNumber: any, peers: any, rpcPort: any, wsPort: any, blockinfo: any }, index: any) => (
+        nodes ? nodes.map((node: { nodeId: any; nodeName: any; nodeNetwork: any, version: any, chainid: any, sync: any, clientversion: any, blockNumber: any, peers: any, rpcPort: any, wsPort: any, blockinfo: any }, index: any) => (
           <Grid item xs={3}>
             <Paper className={classes.paper} key={index} id={index}>
               <Typography variant="h5">{node.nodeName}</Typography>
@@ -82,13 +82,13 @@ function NodeList(props: IProps) {
                     }
                   </Paper>
               }
-              <Button onClick={() => openLink(node.rpcPort)} className={classes.menuButton}>View on Jade Explorer</Button>
+              {node.rpcPort !== "disabled" && <Button onClick={() => openLink(node.rpcPort)} className={classes.menuButton}>View on Jade Explorer</Button>}
               <Button className={classes.menuButton} onClick={() => props.removeNodes(node.nodeId, node.nodeName, true)}>Remove Node</Button>
               <Typography><small>{node.clientversion}</small></Typography>
             </Paper>
           </Grid>
         ))
-      }
+      : <div>Loading</div>}
     </Grid >
   );
 }
