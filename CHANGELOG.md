@@ -1,3 +1,10 @@
+## [1.1.11](https://github.com/ethernodeio/enui/compare/1.1.10...1.1.11) (2019-10-27)
+
+
+### Bug Fixes
+
+* useEffect dep fixed ([71d3ec8](https://github.com/ethernodeio/enui/commit/71d3ec89b3c8cc1f148d6d18d769dfa42480d428))
+
 ## [1.1.10](https://github.com/ethernodeio/enui/compare/1.1.9...1.1.10) (2019-10-27)
 
 
