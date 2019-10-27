@@ -1,3 +1,11 @@
+## [1.1.10](https://github.com/ethernodeio/enui/compare/1.1.9...1.1.10) (2019-10-27)
+
+
+### Bug Fixes
+
+* fixes, smoother ([3bc0374](https://github.com/ethernodeio/enui/commit/3bc03742b8166cc787b8020c75e40abf415f6cea))
+* release next version ([b7aaa68](https://github.com/ethernodeio/enui/commit/b7aaa6895255c4a6b085bd466018d9cc04dae222))
+
 ## [1.1.9](https://github.com/ethernodeio/enui/compare/1.1.8...1.1.9) (2019-10-14)
 
 
